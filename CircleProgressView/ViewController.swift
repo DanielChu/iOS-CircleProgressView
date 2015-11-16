@@ -14,6 +14,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var progressSlider: UISlider!
     @IBOutlet weak var clockwiseSwitch: UISwitch!
+    @IBOutlet weak var showTextSwitch: UISwitch!
+    @IBOutlet weak var showPercentageSwitch: UISwitch!
     
     let nf = NSNumberFormatter()
 
@@ -33,7 +35,16 @@ class ViewController: UIViewController {
     }
 
     // MARK: - IBActions
+    @IBAction func centerTextSwitchDidChangeValue(sender: AnyObject) {
+        let s  = sender as! UISwitch
+        self.circleProgressView.displayValueInCenter = s.on
+    }
 
+    @IBAction func asPercentageSwitchDidChangeValue(sender: AnyObject) {
+        let s  = sender as! UISwitch
+        self.circleProgressView.centerValueAsPercentage = s.on
+    }
+    
     @IBAction func sliderDidChangeValue(sender: AnyObject) {
         let slider:UISlider = sender as! UISlider
         self.circleProgressView.progress = Double(slider.value)

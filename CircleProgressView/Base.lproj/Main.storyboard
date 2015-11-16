@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15C40a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -18,7 +19,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Progress:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pOz-HB-1dd">
-                                <rect key="frame" x="16" y="559" width="120" height="21"/>
+                                <rect key="frame" x="20" y="559" width="120" height="21"/>
+                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="CmE-2p-of6"/>
                                     <constraint firstAttribute="width" constant="120" id="VlS-uY-yPs"/>
@@ -28,7 +30,8 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="M0Q-Fu-b6r">
-                                <rect key="frame" x="142" y="555" width="387" height="31"/>
+                                <rect key="frame" x="146" y="555" width="379" height="31"/>
+                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="weE-bt-Wfr"/>
                                 </constraints>
@@ -37,7 +40,8 @@
                                 </connections>
                             </slider>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TOf-ZN-5s6">
-                                <rect key="frame" x="535" y="554" width="51" height="31"/>
+                                <rect key="frame" x="531" y="554" width="51" height="31"/>
+                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="tvr-ip-sz4"/>
                                     <constraint firstAttribute="width" constant="49" id="yQ3-h0-BRO"/>
@@ -48,6 +52,7 @@
                             </switch>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y83-4d-8fY" customClass="CircleProgressView" customModule="CircleProgressView">
                                 <rect key="frame" x="175" y="150" width="250" height="250"/>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="Hm8-Dh-irI"/>
@@ -65,18 +70,55 @@
                                     <userDefinedRuntimeAttribute type="image" keyPath="centerImage" value="lion"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="02z-uk-up9">
+                                <rect key="frame" x="351" y="516" width="51" height="31"/>
+                                <animations/>
+                                <connections>
+                                    <action selector="asPercentageSwitchDidChangeValue:" destination="BYZ-38-t0r" eventType="valueChanged" id="3xB-uO-9LX"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Center Text:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zya-5Z-hCN">
+                                <rect key="frame" x="16" y="521" width="140" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="As Percentage:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iua-px-3ld">
+                                <rect key="frame" x="225" y="521" width="116" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="EwP-Rn-8qn">
+                                <rect key="frame" x="166" y="516" width="51" height="31"/>
+                                <animations/>
+                                <connections>
+                                    <action selector="centerTextSwitchDidChangeValue:" destination="BYZ-38-t0r" eventType="valueChanged" id="DsP-7Z-qrr"/>
+                                </connections>
+                            </switch>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="EwP-Rn-8qn" firstAttribute="centerY" secondItem="zya-5Z-hCN" secondAttribute="centerY" id="3GG-M1-i8m"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="TOf-ZN-5s6" secondAttribute="bottom" constant="15" id="DQV-mP-I7n"/>
+                            <constraint firstItem="EwP-Rn-8qn" firstAttribute="leading" secondItem="zya-5Z-hCN" secondAttribute="trailing" constant="10" id="Ka7-GO-xSZ"/>
                             <constraint firstAttribute="centerX" secondItem="Y83-4d-8fY" secondAttribute="centerX" id="Nrg-Hi-ic7"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="pOz-HB-1dd" secondAttribute="bottom" constant="20" id="P4n-7z-DDd"/>
+                            <constraint firstItem="Iua-px-3ld" firstAttribute="centerY" secondItem="zya-5Z-hCN" secondAttribute="centerY" id="R69-QO-ox3"/>
+                            <constraint firstItem="02z-uk-up9" firstAttribute="leading" secondItem="Iua-px-3ld" secondAttribute="trailing" constant="10" id="SXr-5G-zyq"/>
                             <constraint firstAttribute="centerY" secondItem="Y83-4d-8fY" secondAttribute="centerY" constant="25" id="WFK-zA-kab"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="M0Q-Fu-b6r" secondAttribute="bottom" constant="15" id="bcW-P3-Yqq"/>
                             <constraint firstItem="pOz-HB-1dd" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="dth-W4-hfR"/>
+                            <constraint firstItem="Iua-px-3ld" firstAttribute="leading" secondItem="EwP-Rn-8qn" secondAttribute="trailing" constant="10" id="e9G-zY-aR9"/>
+                            <constraint firstItem="zya-5Z-hCN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-4" id="ezr-Hu-CZf"/>
                             <constraint firstItem="TOf-ZN-5s6" firstAttribute="leading" secondItem="M0Q-Fu-b6r" secondAttribute="trailing" constant="8" id="f4o-gX-KW6"/>
                             <constraint firstItem="TOf-ZN-5s6" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="gDb-iX-71e"/>
                             <constraint firstItem="M0Q-Fu-b6r" firstAttribute="leading" secondItem="pOz-HB-1dd" secondAttribute="trailing" constant="8" id="onn-uo-0ry"/>
+                            <constraint firstItem="02z-uk-up9" firstAttribute="centerY" secondItem="zya-5Z-hCN" secondAttribute="centerY" id="sMY-gK-G7Y"/>
+                            <constraint firstItem="pOz-HB-1dd" firstAttribute="top" secondItem="zya-5Z-hCN" secondAttribute="bottom" constant="17" id="xtl-5i-5oO"/>
                         </constraints>
                     </view>
                     <connections>
@@ -84,10 +126,13 @@
                         <outlet property="clockwiseSwitch" destination="TOf-ZN-5s6" id="dC4-Oa-FWI"/>
                         <outlet property="progressLabel" destination="pOz-HB-1dd" id="o3d-gj-qny"/>
                         <outlet property="progressSlider" destination="M0Q-Fu-b6r" id="JHa-9l-e2P"/>
+                        <outlet property="showPercentageSwitch" destination="02z-uk-up9" id="IIj-KV-Z5S"/>
+                        <outlet property="showTextSwitch" destination="EwP-Rn-8qn" id="Cy4-fR-ush"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="288" y="319"/>
         </scene>
     </scenes>
     <resources>

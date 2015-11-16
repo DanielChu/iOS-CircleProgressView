@@ -9,7 +9,7 @@
 import UIKit
 
 @objc @IBDesignable public class CircleProgressView: UIView {
-
+    
     private struct Constants {
         let circleDegress = 360.0
         let minimumValue = 0.000001
@@ -18,12 +18,68 @@ import UIKit
         let twoSeventyDegrees = 270.0
         var contentView:UIView = UIView()
     }
-
+    //private var displayPercentageInCenter = false
+    
     private let constants = Constants()
     private var internalProgress:Double = 0.0
-
+    
     private var displayLink: CADisplayLink?
     private var destinationProgress: Double = 0.0
+    
+    private var textLabel: UILabel? = nil
+    
+    override public func layoutSubviews() {
+        super.layoutSubviews()
+        if let l = self.textLabel {
+            var s = self.bounds.size.width
+            if s > self.bounds.size.height {
+                s = self.bounds.size.height
+            }
+            l.frame = self.bounds
+            l.font = UIFont(name: "HelveticaNeue-Thin", size:0.37 * s)
+        }
+    }
+    
+    func setDisplayProgressInCenter(enabled: Bool) {
+        if enabled {
+            if self.textLabel == nil {
+                let l = UILabel(frame: self.bounds)
+                l.textAlignment = NSTextAlignment.Center
+                l.textColor = self.centerTextColor
+                var s = self.bounds.size.width
+                if s > self.bounds.size.height {
+                    s = self.bounds.size.height
+                }
+                let f = UIFont(name: "HelveticaNeue-Thin", size:0.37 * s)
+                l.font = f
+                self.textLabel = l
+                //self.displayPercentageInCenter = true
+                // add constraints
+                
+                //constraints = [NSLayoutConstraint]()
+                self.addSubview(l)
+            }
+        } else {
+            if let l = self.textLabel {
+                l.removeFromSuperview()
+                self.textLabel = nil
+            }
+            //self.displayPercentageInCenter = false
+        }
+    }
+    
+    @IBInspectable public var displayValueInCenter: Bool = false {
+        didSet {
+            self.setDisplayProgressInCenter(displayValueInCenter)
+            setNeedsDisplay()
+        }
+    }
+    
+    @IBInspectable public var centerValueAsPercentage: Bool = true {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
     
     @IBInspectable public var progress: Double = 0.000001 {
         didSet {
@@ -31,39 +87,44 @@ import UIKit
             setNeedsDisplay()
         }
     }
-
-    @IBInspectable public var refreshRate: Double = 0.0 {
-        didSet { setNeedsDisplay() }
-    }
-
+    
     @IBInspectable public var clockwise: Bool = true {
         didSet { setNeedsDisplay() }
     }
-
-    @IBInspectable public var trackWidth: CGFloat = 10 {
+    
+    @IBInspectable public var trackWidth: CGFloat = 5 {
         didSet { setNeedsDisplay() }
     }
-
+    
     @IBInspectable public var trackImage: UIImage? {
         didSet { setNeedsDisplay() }
     }
-
+    
+    @IBInspectable public var centerTextColor: UIColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1.0) {
+        didSet { setNeedsDisplay() }
+    }
+    
+    
     @IBInspectable public var trackBackgroundColor: UIColor = UIColor.grayColor() {
         didSet { setNeedsDisplay() }
     }
-
+    
     @IBInspectable public var trackFillColor: UIColor = UIColor.blueColor() {
         didSet { setNeedsDisplay() }
     }
-
+    
+    @IBInspectable public var secondTrackFillColor: UIColor = UIColor.redColor() {
+        didSet { setNeedsDisplay() }
+    }
+    
     @IBInspectable public var trackBorderColor:UIColor = UIColor.clearColor() {
         didSet { setNeedsDisplay() }
     }
-
+    
     @IBInspectable public var trackBorderWidth: CGFloat = 0 {
         didSet { setNeedsDisplay() }
     }
-
+    
     @IBInspectable public var centerFillColor: UIColor = UIColor.whiteColor() {
         didSet { setNeedsDisplay() }
     }
@@ -71,17 +132,17 @@ import UIKit
     @IBInspectable public var centerImage: UIImage? {
         didSet { setNeedsDisplay() }
     }
-
+    
     @IBInspectable public var contentView: UIView {
         return self.constants.contentView
     }
-
+    
     required override public init(frame: CGRect) {
         super.init(frame: frame)
         internalInit()
         self.addSubview(contentView)
     }
-
+    
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         internalInit()
@@ -101,8 +162,8 @@ import UIKit
         internalProgress = (internalProgress/1.0) == 0.0 ? constants.minimumValue : progress
         internalProgress = (internalProgress/1.0) == 1.0 ? constants.maximumValue : internalProgress
         internalProgress = clockwise ?
-                                (-constants.twoSeventyDegrees + ((1.0 - internalProgress) * constants.circleDegress)) :
-                                (constants.ninetyDegrees - ((1.0 - internalProgress) * constants.circleDegress))
+            (-constants.twoSeventyDegrees + ((1.0 - internalProgress) * constants.circleDegress)) :
+            (constants.ninetyDegrees - ((1.0 - internalProgress) * constants.circleDegress))
         
         let context = UIGraphicsGetCurrentContext()
         
@@ -157,6 +218,16 @@ import UIKit
             layer.path = centerPath.CGPath
             contentView.layer.mask = layer
         }
+        
+        if self.displayValueInCenter {
+            if let l = self.textLabel {
+                if self.centerValueAsPercentage {
+                    l.attributedText = NSAttributedString(string: "\(Int(round(progress * 100)))%")
+                } else {
+                    l.attributedText = NSAttributedString(string: "\(String(format: "%.2f", arguments: [progress]))")
+                }
+            }
+        }
     }
     
     //MARK: - Progress Update
@@ -174,9 +245,9 @@ import UIKit
     //MARK: - CADisplayLink Tick
     
     internal func displayLinkTick() {
-            
-        let renderTime = refreshRate.isZero ? displayLink!.duration : refreshRate
-
+        
+        let renderTime = displayLink!.duration
+        
         if destinationProgress > progress {
             progress += renderTime
             if progress >= destinationProgress {
