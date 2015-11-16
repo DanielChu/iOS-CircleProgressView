@@ -10,7 +10,7 @@ NOTE: There is an Objective-C version of the control in this project as well. Co
 Features
 ------
 
-* Ability to display current value in center of view as percentage or raw value
+* Ability to display current value in center of view as percentage or raw value.
 * Increase or decreasing progress changes.
 * Variable track width.
 * Track image optional.
